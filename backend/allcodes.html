@@ -1,0 +1,945 @@
+import React, { useState } from "react";
+
+const dateSuggestions = {
+  3: {
+    title: "✅ For 3-Day Events (0 Leaves Required)",
+    dates: [
+      "Mar 14 (Fri) – Mar 16 (Sun) → Includes Holi + Weekend",
+      "Apr 18 (Fri) – Apr 20 (Sun) → Includes Good Friday + Weekend",
+      "Aug 15 (Fri) – Aug 17 (Sun) → Includes Independence Day + Weekend",
+    ],
+  },
+  4: {
+    title: "✅ For 4-Day Events (Only 1 Leave Required)",
+    dates: [
+      "Mar 13 – Mar 16",
+      "Mar 14 – Mar 17",
+      "Apr 17 – Apr 20",
+      "Apr 18 – Apr 21",
+      "Aug 14 – Aug 17",
+      "Aug 15 – Aug 18",
+      "Oct 2 – Oct 5 → Includes Gandhi Jayanti + Weekend",
+      "Oct 18 – Oct 21 → Includes Diwali + Weekend",
+      "Dec 25 – Dec 28 → Includes Christmas + Weekend",
+    ],
+  },
+  5: {
+    title: "✅ For 5-Day Events (Only 2 Leaves Required)",
+    dates: [
+      "Mar 12 – Mar 16",
+      "Mar 13 – Mar 17",
+      "Mar 14 – Mar 18",
+      "Apr 16 – Apr 20",
+      "Apr 17 – Apr 21",
+      "Apr 18 – Apr 22",
+      "Aug 13 – Aug 17",
+      "Aug 14 – Aug 18",
+      "Aug 15 – Aug 19",
+      "Oct 1 – Oct 5",
+    ],
+  },
+  6: {
+    title: "✅ For 6-Day Events (Only 3 Leaves Required)",
+    dates: [
+      "Mar 11 – Mar 16",
+      "Mar 12 – Mar 17",
+      "Mar 13 – Mar 18",
+      "Mar 14 – Mar 19",
+      "Apr 15 – Apr 20",
+      "Apr 16 – Apr 21",
+      "Apr 17 – Apr 22",
+      "Apr 18 – Apr 23",
+      "Aug 12 – Aug 17",
+      "Aug 13 – Aug 18",
+    ],
+  },
+};
+
+const DateBox = () => {
+  const [days, setDays] = useState("");
+  const [suggestion, setSuggestion] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const numDays = parseInt(days, 10);
+    if (numDays >= 3 && numDays <= 6) {
+      setSuggestion(dateSuggestions[numDays]);
+    } else {
+      setSuggestion({ title: "❌ Invalid Input", dates: ["Please enter a number between 3 and 6."] });
+    }
+  };
+
+  return (
+    <div className="abc">
+      <h1 className="text-center mt-4 mb-4">📅 Date Recommendation System</h1>
+      <div
+        className="container bg-light p-4 border rounded shadow"
+        style={{ maxWidth: "600px" }}
+      >
+        <h5 className="mb-3">Enter Number of Days</h5>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
+              type="number"
+              className="form-control"
+              value={days}
+              onChange={(e) => setDays(e.target.value)}
+              placeholder="Enter number of days (3 to 6)"
+              required
+              min="3"
+              max="6"
+            />
+          </div>
+          <button type="submit" className="btn btn-success w-100">
+            Show Best Event Dates
+          </button>
+        </form>
+
+        {suggestion && (
+          <div className="mt-5">
+            <div className="card">
+              <div className="card-header bg-primary text-white">
+                <strong>{suggestion.title}</strong>
+              </div>
+              <ul className="list-group list-group-flush">
+                {suggestion.dates.map((date, index) => (
+                  <li key={index} className="list-group-item">
+                    {date}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default DateBox;
+import React from 'react';
+
+const Event = () => {
+  return (
+    <div>
+      <h1 style={{ textAlign: 'center' }}><b>Create an Event</b></h1>
+      <div className="container mt-4">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+          {/* Event 1 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event1.png" className="card-img-top" alt="Marriage" />
+              <div className="card-body">
+                <p className="card-text">𝓜𝓪𝓻𝓻𝓲𝓪𝓰𝓮</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 2 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event11.png" className="card-img-top" alt="Birthday Party" />
+              <div className="card-body">
+                <p className="card-text">𝓑𝓲𝓻𝓽𝓱𝓭𝓪𝔂 𝓟𝓪𝓻𝓽𝔂</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 3 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event3.png" className="card-img-top" alt="Concert" />
+              <div className="card-body">
+                <p className="card-text">𝓒𝓸𝓷𝓬𝓮𝓻𝓽</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 4 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event4.png" className="card-img-top" alt="Match Screening" />
+              <div className="card-body">
+                <p className="card-text">𝓜𝓪𝓽𝓬𝓱 𝓢𝓬𝓻𝓮𝓮𝓷𝓲𝓷𝓰</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 5 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event5.png" className="card-img-top" alt="Conference" />
+              <div className="card-body">
+                <p className="card-text">𝓒𝓸𝓷𝓯𝓮𝓻𝓮𝓷𝓬𝓮</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 6 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event6.png" className="card-img-top" alt="Family Gathering" />
+              <div className="card-body">
+                <p className="card-text">𝓕𝓪𝓶𝓲𝓵𝔂 𝓖𝓪𝓽𝓱𝓮𝓻𝓲𝓷𝓰</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 7 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event7.png" className="card-img-top" alt="Kitty Party" />
+              <div className="card-body">
+                <p className="card-text">𝓚𝓲𝓽𝓽𝔂 𝓟𝓪𝓻𝓽𝔂</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 8 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event8.png" className="card-img-top" alt="Bachelors Party" />
+              <div className="card-body">
+                <p className="card-text">𝓑𝓪𝓬𝓱𝓮𝓵𝓸𝓻𝓼 𝓟𝓪𝓻𝓽𝔂</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Event 9 */}
+          <div className="col">
+            <div className="card shadow-sm">
+              <img src="./images/event9.png" className="card-img-top" alt="Art Exhibitions" />
+              <div className="card-body">
+                <p className="card-text">𝓐𝓻𝓽 𝓔𝔁𝓱𝓲𝓫𝓲𝓽𝓲𝓸𝓷𝓼</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small className="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr style={{ border: "2.5px solid rgb(0, 0, 0)", width: "100%", marginTop: "2rem" }} />
+      <h1 className="className"></h1>
+    </div>
+  );
+};
+
+export default Event;
+import React from 'react';
+
+const Footer = () => {
+  return (
+    <footer className="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+      <div className="col mb-3">
+        <a href="/" className="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none" aria-label="Brand">
+          <img src="./images/logo.jpg" alt="Your Logo" width="75" height="75" className="me-2" />
+          <svg className="bi me-2" width="40" height="32" aria-hidden="true">
+            <use xlinkHref="#bootstrap" />
+          </svg>
+        </a>
+        <p className="text-body-secondary">© 2025</p>
+      </div>
+
+      <div className="col mb-3"></div>
+
+      {[1, 2, 3].map((item) => (
+        <div className="col mb-3" key={item}>
+          <h5>Section</h5>
+          <ul className="nav flex-column">
+            <li className="nav-item mb-2">
+              <a href="#" className="nav-link p-0 text-body-secondary">Home</a>
+            </li>
+            <li className="nav-item mb-2">
+              <a href="#" className="nav-link p-0 text-body-secondary">Features</a>
+            </li>
+            <li className="nav-item mb-2">
+              <a href="#" className="nav-link p-0 text-body-secondary">Pricing</a>
+            </li>
+            <li className="nav-item mb-2">
+              <a href="#" className="nav-link p-0 text-body-secondary">FAQs</a>
+            </li>
+            <li className="nav-item mb-2">
+              <a href="#" className="nav-link p-0 text-body-secondary">About</a>
+            </li>
+          </ul>
+        </div>
+      ))}
+    </footer>
+  );
+};
+
+export default Footer;
+import React, { useState } from "react";
+
+const Help = () => {
+  const [query, setQuery] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSupportSubmit = (e) => {
+    e.preventDefault();
+    if (query.trim() !== "") {
+      setSubmitted(true);
+    }
+  };
+
+  return (
+    <div className="container mt-5 p-4 border rounded shadow-sm" style={{ maxWidth: "600px" }}>
+      <h2 className="mb-3">🛟 Help & Support</h2>
+      <p>If you have any questions, feel free to ask us here. We’ll get back to you as soon as possible!</p>
+      <form onSubmit={handleSupportSubmit}>
+        <div className="mb-3">
+          <textarea
+            className="form-control"
+            rows="4"
+            placeholder="Type your question or concern here..."
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSubmitted(false);
+            }}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-success">
+          Submit Query
+        </button>
+      </form>
+
+      {submitted && (
+        <div className="alert alert-info mt-3" role="alert">
+          ✅ Thank you for reaching out! We’ve received your query: <br />
+          <strong>{query}</strong>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Help;
+import React, { useState } from "react";
+import axios from "axios";
+
+const Login = ({ setIsLoggedIn, setShowSignup }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      localStorage.setItem('token', res.data.token);
+      setMessage("✅ Login successful!");
+      setTimeout(() => setIsLoggedIn(true), 1000); // transition after message
+    } catch (err) {
+      setMessage("❌ Invalid email or password.");
+    }
+  };
+
+  return (
+    <div className="container mt-5 d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+      <div className="p-5 border rounded shadow-sm" style={{ maxWidth: "400px", width: "100%" }}>
+        <h2 className="text-center mb-4">🔐 Login</h2>
+        <form onSubmit={handleLogin}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Enter email"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Enter password"
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">Login</button>
+        </form>
+        <p className="mt-3 text-center">
+          Don't have an account? <button className="btn btn-link" onClick={() => setShowSignup(true)}>Sign Up</button>
+        </p>
+        {message && (
+          <div className={`mt-4 alert ${message.includes("successful") ? "alert-success" : "alert-danger"}`} role="alert">
+            {message}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Login;
+import React from 'react';
+
+const Main = () => {
+  return (
+    <div className="container">
+      <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src="/images/img1.jpg" className="d-block w-100" alt="Slide 1" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/img2.jpg" className="d-block w-100" alt="Slide 2" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/img3.jpg" className="d-block w-100" alt="Slide 3" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/img4.jpg" className="d-block w-100" alt="Slide 4" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/img5.jpg" className="d-block w-100" alt="Slide 5" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/img6.jpg" className="d-block w-100" alt="Slide 6" />
+          </div>
+        </div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Main;
+import React from 'react';
+
+export default function Header() {
+  return (
+    <div>
+      <nav className="navbar navbar-expand-lg custom-navbar">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#"><h4>FÊTE</h4></a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link" href="https://travelbuddya.my.canva.site/fete" target="_blank" rel="noopener noreferrer">
+                  <h5>About</h5>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+}
+import React, { useState } from "react";
+
+const Notes = () => {
+  const [note, setNote] = useState("");
+  const [notesList, setNotesList] = useState([]);
+
+  const handleAddNote = (e) => {
+    e.preventDefault();
+    if (note.trim() === "") return;
+
+    setNotesList([...notesList, note]);
+    setNote("");
+  };
+
+  const handleDeleteNote = (indexToDelete) => {
+    const updatedNotes = notesList.filter((_, index) => index !== indexToDelete);
+    setNotesList(updatedNotes);
+  };
+
+  return (
+    <div className="container mt-5 p-4 border rounded shadow-sm" style={{ maxWidth: "600px" }}>
+      <h2 className="mb-3">📝 Your Notes</h2>
+      <form onSubmit={handleAddNote} className="mb-4">
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Write your note here..."
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          />
+          <button className="btn btn-success" type="submit">Add Note</button>
+        </div>
+      </form>
+
+      {notesList.length === 0 ? (
+        <p className="text-muted">No notes added yet.</p>
+      ) : (
+        <ul className="list-group">
+          {notesList.map((item, index) => (
+            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+              {item}
+              <button className="btn btn-sm btn-danger" onClick={() => handleDeleteNote(index)}>
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default Notes;
+import React, { useState } from "react";
+
+const Payment = () => {
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardHolder, setCardHolder] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [paid, setPaid] = useState(false);
+
+  const handlePayment = (e) => {
+    e.preventDefault();
+
+    // Basic validation (front-end only)
+    if (cardNumber && cardHolder && expiry && cvv) {
+      setPaid(true);
+    }
+  };
+
+  return (
+    <div className="container mt-5 p-4 border rounded shadow-sm" style={{ maxWidth: "600px" }}>
+      <h2 className="mb-4">💳 Payment Gateway</h2>
+      <form onSubmit={handlePayment}>
+        <div className="mb-3">
+          <label className="form-label">Cardholder Name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="e.g. John Doe"
+            value={cardHolder}
+            onChange={(e) => setCardHolder(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Card Number</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="xxxx xxxx xxxx xxxx"
+            maxLength={19}
+            value={cardNumber}
+            onChange={(e) => setCardNumber(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <label className="form-label">Expiry Date</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="MM/YY"
+              value={expiry}
+              onChange={(e) => setExpiry(e.target.value)}
+              required
+            />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label className="form-label">CVV</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="123"
+              maxLength={4}
+              value={cvv}
+              onChange={(e) => setCvv(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="btn btn-primary w-100">
+          Pay Now
+        </button>
+      </form>
+
+      {paid && (
+        <div className="alert alert-success mt-4" role="alert">
+          ✅ Payment Successful! Thank you for your purchase.
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Payment;
+import React, { useState } from "react";
+import axios from "axios";
+
+const Signup = ({ setIsLoggedIn, setShowSignup }) => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/signup', { username, email, password });
+      localStorage.setItem('token', res.data.token);
+      setMessage("✅ Signup successful! Please login.");
+      setTimeout(() => setShowSignup(false), 1000); // transition after message
+    } catch (err) {
+      setMessage("❌ Signup failed. Please try again.");
+    }
+  };
+
+  return (
+    <div className="container mt-5 d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+      <div className="p-5 border rounded shadow-sm" style={{ maxWidth: "400px", width: "100%" }}>
+        <h2 className="text-center mb-4">📝 Sign Up</h2>
+        <form onSubmit={handleSignup}>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              placeholder="Enter username"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Enter email"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Enter password"
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">Sign Up</button>
+        </form>
+        <p className="mt-3 text-center">
+          Already have an account? <button className="btn btn-link" onClick={() => setShowSignup(false)}>Login</button>
+        </p>
+        {message && (
+          <div className={`mt-4 alert ${message.includes("successful") ? "alert-success" : "alert-danger"}`} role="alert">
+            {message}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Signup;
+import logo from './logo.svg';
+import './App.css';
+import React, { useState } from 'react';
+import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
+import Main from './Components/Main';
+import Event from './Components/Event';
+import DateBox from './Components/DateBox';
+import Help from './Components/Help';
+import Payment from './Components/Payment';
+import Notes from './Components/Notes';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
+
+  return (
+    <div className="App">
+      {!isLoggedIn ? (
+        <>
+          {showSignup ? (
+            <Signup setIsLoggedIn={setIsLoggedIn} setShowSignup={setShowSignup} />
+          ) : (
+            <Login setIsLoggedIn={setIsLoggedIn} setShowSignup={setShowSignup} />
+          )}
+        </>
+      ) : (
+        <>
+          <Navbar />
+          <Main />
+          <Event />
+          <DateBox />
+          <Notes />
+          <Payment />
+          <Help />
+          <Footer />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default App;
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+reportWebVitals();
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const UserSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
+
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+const User = mongoose.model('User', UserSchema);
+module.exports = User;
+const express = require('express');
+const router = express.Router();
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+// Signup Route
+router.post('/signup', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ msg: 'User already exists' });
+    }
+
+    user = new User({
+      username,
+      email,
+      password,
+    });
+
+    await user.save();
+
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      'your_jwt_secret',
+      { expiresIn: '1h' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Login Route
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: 'Invalid credentials' });
+    }
+
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      'your_jwt_secret',
+      { expiresIn: '1h' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+module.exports = router;
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors')
+const authRoutes = require('./routes/auth');
+
+const app = express();
+
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
+
+// Routes
+app.use('/api/auth', authRoutes);
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/my-react-app', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+this are all the important code for my project understand it , and i will make few changes
+all code
